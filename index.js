@@ -24,7 +24,8 @@ app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 
 // Main Routes
 app.use("/api/user", require("./routes/userRoutes/userRoutes"));
+app.use("/api/seller", require("./routes/sellerRoutes/sellerRoutes"));
 
 app.listen(port, () => {
-  console.log(`SERVER IS RUNNING ON PORT ${port}`);
+  console.log(`SERVER IS RUNNING ON PORT ${port}`.bgYellow.black);
 });

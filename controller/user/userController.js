@@ -6,7 +6,7 @@ const User = require("../../model/user model/userModel");
 const {
   registerSchema,
   loginSchema,
-} = require("../../validation checks/user/userValidation");
+} = require("../../validation checks/user validation/userValidation");
 
 // Check User Validation Function //
 const validation = (checkUserValidaton) => {
@@ -91,7 +91,7 @@ const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({email});
 
   if (!user || !(await bcrypt.compare(password, user.password))) {
-    res.status(400);
+    res.status(401);
     throw new Error("Invalid Credentials");
   }
 
