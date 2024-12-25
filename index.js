@@ -22,9 +22,25 @@ app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
 app.use(morgan("combined"));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 
-// Main Routes
+// Main Routes //
+
+// User Route //
 app.use("/api/user", require("./routes/userRoutes/userRoutes"));
+
+// Seller Route //
 app.use("/api/seller", require("./routes/sellerRoutes/sellerRoutes"));
+
+// User Product Route //
+app.use(
+  "/api/users/products",
+  require("./routes/userRoutes/userProductRoutes")
+);
+
+// Seller Product Route //
+app.use(
+  "/api/sellers/products",
+  require("./routes/sellerRoutes/sellerProductRoutes")
+);
 
 app.listen(port, () => {
   console.log(`SERVER IS RUNNING ON PORT ${port}`.bgYellow.black);

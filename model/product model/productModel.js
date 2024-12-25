@@ -82,12 +82,12 @@ const productSchema = mongoose.Schema(
         },
       },
     ],
+    ////🟠🟠////////🟠🟠////////🟠🟠////////🟠🟠////
     seller: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Seller",
       required: [true, "No Seller Found"],
     },
-    ////🟠🟠////////🟠🟠////////🟠🟠////////🟠🟠////
   },
   {
     timestamps: true,
