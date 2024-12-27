@@ -6,15 +6,15 @@ const reviewSchema = zod.object({
   comment: zod.string().max(500, "Comments cannot Exceed 500 Characters"),
 });
 
-const productSchema = zod.object({
+const createProductSchema = zod.object({
   name: zod.string(),
   description: zod.string(),
   price: zod.number().max(9999999, "Maximum price is 9999999"),
   quantity: zod.number(),
   category: zod.string(),
-  ratings: zod.number(),
-  noOfReviews: zod.number(),
-  reviews: zod.array(reviewSchema),
+  ratings: zod.number().optional(),
+  noOfReviews: zod.number().optional(),
+  reviews: zod.array(reviewSchema).optional(),
 });
 
-module.exports = {productSchema};
+module.exports = {createProductSchema};
