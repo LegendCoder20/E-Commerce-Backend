@@ -179,15 +179,55 @@ const updateProduct = asyncHandler(async (req, res) => {
 ////🟡🟡////////🟡🟡////////🟡🟡////////🟡🟡////
 
 ////🟠🟠////////🟠🟠////////🟠🟠////////🟠🟠////
-const deleteProduct = asyncHandler(async (req, res) => {});
+const deleteProduct = asyncHandler(async (req, res) => {
+  const productId = req.params.id;
+  const product = await Product.findByIdAndDelete(productId);
+
+  if (!product) {
+    res.status(400);
+    throw new Error("No Product Found Of Such ID");
+  }
+
+  if (!req.seller) {
+    res.status(400);
+    throw new Error("Seller Not Found");
+  }
+  if (product.seller.toString() !== req.seller.id) {
+    res.status(401);
+    throw new Error("UnAthorized to Delete this Product");
+  }
+
+  try {
+    await cloudinary.uploader.destroy(product.image.public_id);
+    res.status(200).json({
+      message: "Product Deleted Successfully",
+    });
+  } catch (err) {
+    res.status(400);
+    throw new Error("Some Problem Occured while Deleting Product");
+  }
+});
 ////🟠🟠////////🟠🟠////////🟠🟠////////🟠🟠////
 
 ////🟡🟡////////🟡🟡////////🟡🟡////////🟡🟡////
-const getSellerProducts = asyncHandler(async (req, res) => {});
+const getSellerProducts = asyncHandler(async (req, res) => {
+  const seller = req.seller.id;
+  const products = await Product.find({seller: seller});
+  res.status(200).json({
+    products: products,
+    message: "All Products of the Seller Fetched",
+  });
+});
 ////🟡🟡////////🟡🟡////////🟡🟡////////🟡🟡////
 
 ////🟠🟠////////🟠🟠////////🟠🟠////////🟠🟠////
-const getProductDetails = asyncHandler(async (req, res) => {});
+const getProductDetails = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  res.status(200).json({
+    product: product,
+  });
+});
 ////🟠🟠////////🟠🟠////////🟠🟠////////🟠🟠////
 
 module.exports = {

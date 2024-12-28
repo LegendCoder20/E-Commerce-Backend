@@ -26,7 +26,6 @@ app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 
 // User Route //
 app.use("/api/user", require("./routes/userRoutes/userRoutes"));
-app.use("/api/seller", require("./routes/sellerRoutes/sellerRoutes"));
 
 // Seller Route //
 app.use("/api/seller", require("./routes/sellerRoutes/sellerRoutes"));
