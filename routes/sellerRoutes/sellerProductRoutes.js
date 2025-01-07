@@ -32,8 +32,8 @@ router
 //🟡🟡🟡🟡// -> AUTH <- //
 router
   .route("/:id")
-  .delete(protect, deleteProduct)
-  .get(protect, getProductDetails); // Get the Product Details (Authenticated Seller Only)
+  .delete(protect(Seller, "seller"), deleteProduct)
+  .get(protect(Seller, "seller"), getProductDetails); // Get the Product Details (Authenticated Seller Only)
 //🟡🟡🟡🟡
 
 module.exports = router;

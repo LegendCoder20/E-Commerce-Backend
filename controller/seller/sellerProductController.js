@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const asyncHandler = require("express-async-handler");
 const Product = require("../../model/product model/productModel");
 const {
@@ -181,7 +183,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 ////🟠🟠////////🟠🟠////////🟠🟠////////🟠🟠////
 const deleteProduct = asyncHandler(async (req, res) => {
   const productId = req.params.id;
-  const product = await Product.findByIdAndDelete(productId);
+  const product = await Product.findById(productId);
 
   if (!product) {
     res.status(400);
@@ -199,6 +201,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
   try {
     await cloudinary.uploader.destroy(product.image.public_id);
+    await Product.findByIdAndDelete(productId);
     res.status(200).json({
       message: "Product Deleted Successfully",
     });
