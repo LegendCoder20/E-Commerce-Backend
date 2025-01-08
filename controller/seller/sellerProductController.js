@@ -89,7 +89,7 @@ const createProduct = asyncHandler(async (req, res) => {
 });
 ////🟠🟠////////🟠🟠////////🟠🟠////////🟠🟠////
 
-////🟡🟡////////🟡🟡////////🟡🟡////////🟡🟡////
+////🟡🟡////////🟡🟡UPDATE PRODUCT🟡🟡////////🟡🟡////
 const updateProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (!product) {
@@ -202,8 +202,11 @@ const deleteProduct = asyncHandler(async (req, res) => {
   try {
     await cloudinary.uploader.destroy(product.image.public_id);
     await Product.findByIdAndDelete(productId);
+    const remainingProducts = await Product.find({seller: req.seller.id});
+
     res.status(200).json({
       message: "Product Deleted Successfully",
+      products: remainingProducts,
     });
   } catch (err) {
     res.status(400);

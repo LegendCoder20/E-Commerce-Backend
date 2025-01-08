@@ -5,6 +5,8 @@ const {
   protect,
 } = require("../../middleware/user seller middleware/authMiddleware");
 
+const User = require("../../model/user model/userModel");
+
 const {
   getAllProducts,
   getProductDetails,
@@ -16,8 +18,8 @@ router.get("/product/:id", getProductDetails); // Get Only the Product of Specif
 //🟡🟡🟡🟡//
 
 //🟠🟠🟠🟠// -> AUTH <- //
-router.get("/auth/products", protect, getAllProducts); // Get All Products for Authenticated User
-router.get("/auth/product/:id", protect, getProductDetails); // Get Product Details for Authenticated User
+router.get("/auth/products", protect(User, "user"), getAllProducts); // Get All Products for Authenticated User
+router.get("/auth/product/:id", protect(User, "user"), getProductDetails); // Get Product Details for Authenticated User
 //🟠🟠🟠🟠//
 
 module.exports = router;

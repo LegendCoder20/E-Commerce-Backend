@@ -33,7 +33,11 @@ router
 router
   .route("/:id")
   .delete(protect(Seller, "seller"), deleteProduct)
-  .get(protect(Seller, "seller"), getProductDetails); // Get the Product Details (Authenticated Seller Only)
+  .get(protect(Seller, "seller"), getSellerProducts); // Fetch products for the authenticated seller
 //🟡🟡🟡🟡
+
+router
+  .route("/productDetails/:id")
+  .get(protect(Seller, "seller"), getProductDetails);
 
 module.exports = router;

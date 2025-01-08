@@ -42,6 +42,9 @@ app.use(
   require("./routes/sellerRoutes/sellerProductRoutes")
 );
 
+// User Cart Route //
+app.use("/api/users/cart", require("./routes/userRoutes/cartRoutes"));
+
 app.listen(port, () => {
   console.log(`SERVER IS RUNNING ON PORT ${port}`.bgYellow.black);
 });
