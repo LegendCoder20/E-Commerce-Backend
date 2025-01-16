@@ -1,14 +1,11 @@
 const errorHandler = (err, req, res, next) => {
-  const statusCode =
-    res.statusCode === 200 ? err.statusCode || 500 : res.statusCode;
+  const statusCode = req.statusCode ? req.statusCode : 500;
 
   res.status(statusCode).json({
-    success: false,
-    message: err.message || "Internal Server Error",
+    message: err.message,
     stack: process.env.NODE_ENV === "production" ? null : err.stack,
     timestamp: new Date().toISOString(),
   });
-  next();
 };
 
 module.exports = errorHandler;

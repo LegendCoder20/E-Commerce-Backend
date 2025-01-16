@@ -8,6 +8,8 @@ dotenv.config({path: ".env"});
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 6000;
 
+const errorHandler = require("./middleware/error handler/errorMiddleware");
+
 const dbConnect = require("./config/dbConnect");
 dbConnect();
 
@@ -44,6 +46,8 @@ app.use(
 
 // User Cart Route //
 app.use("/api/users/cart", require("./routes/userRoutes/cartRoutes"));
+
+app.use(errorHandler); // This Should Be always Put After All the Routes
 
 app.listen(port, () => {
   console.log(`SERVER IS RUNNING ON PORT ${port}`.bgYellow.black);

@@ -69,8 +69,8 @@ const registerUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(500);
-    throw new Error("User Registration Failed due to Server Error");
+    res.status(500).json({message: err.message});
+    // throw new Error("User Registration Failed due to Server Error");
   }
 });
 
