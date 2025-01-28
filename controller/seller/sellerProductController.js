@@ -219,6 +219,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 const getSellerProducts = asyncHandler(async (req, res) => {
   const seller = req.seller.id;
   const products = await Product.find({seller: seller});
+
   res.status(200).json({
     products: products,
     message: "All Products of the Seller Fetched",
