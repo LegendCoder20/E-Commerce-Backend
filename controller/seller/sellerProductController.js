@@ -35,6 +35,8 @@ const createProduct = asyncHandler(async (req, res) => {
   const {name, description, price, quantity, category} = req.body;
   const image = req.file;
 
+  console.log(image);
+
   if (!name || !description || !price || !quantity || !category || !image) {
     res.status(400);
     throw new Error("Please Add All Fields");
