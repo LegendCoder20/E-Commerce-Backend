@@ -12,7 +12,6 @@ const {
   updateProduct,
   deleteProduct,
   getSellerProducts,
-  getProductDetails,
 } = require("../../controller/seller/sellerProductController");
 
 //🟠🟠🟠🟠// -> AUTH <- //
@@ -38,6 +37,6 @@ router
 
 router
   .route("/productDetails/:id")
-  .get(protect(Seller, "seller"), getProductDetails);
+  .get(protect(Seller, "seller"), getSellerProducts);
 
 module.exports = router;
