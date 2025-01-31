@@ -37,6 +37,8 @@ const addProduct = asyncHandler(async (req, res) => {
   }
 
   const product = await Product.findById(product_id).populate("seller");
+  const cartProducts = await Cart.find({user: req.user.id});
+
   if (!product) {
     res.status(404);
     throw new Error("Product Not Found");
@@ -56,6 +58,7 @@ const addProduct = asyncHandler(async (req, res) => {
     if (existingProductIndex !== -1) {
       return res.status(200).json({
         message: "Item already exists in the cart.",
+        cartProductsLength: cartProducts[0].products.length,
       });
     } else {
       cart.products.push({
@@ -77,8 +80,10 @@ const addProduct = asyncHandler(async (req, res) => {
   }
 
   await cart.save();
+  const cartProductsLeng = await Cart.find({user: req.user.id});
   res.status(200).json({
     message: "Product Added to Cart Successfully",
+    cartProductsLength: cartProductsLeng[0].products.length,
   });
 });
 ////🟡🟡////////🟡🟡////////🟡🟡////////🟡🟡////
