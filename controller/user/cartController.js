@@ -11,7 +11,9 @@ const getAllProducts = asyncHandler(async (req, res) => {
     throw new Error("User Not Authorized");
   }
 
-  const cartProducts = await Cart.find({user: req.user.id});
+  const cartProducts = await Cart.find({user: req.user.id}).populate(
+    "products.product_id"
+  );
   if (cartProducts.length > 0) {
     res.status(200).json({
       cartProducts,
