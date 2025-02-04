@@ -47,6 +47,14 @@ app.use(
 // User Cart Route //
 app.use("/api/users/cart", require("./routes/userRoutes/cartRoutes"));
 
+// User Payment Route //
+app.use("/api", require("./routes/paymentRoutes/paymentRoutes"));
+app.get("/api/getKey", (req, res) => {
+  res.status(200).json({
+    key: process.env.RAZORPAY_KEY_ID,
+  });
+});
+
 app.use(errorHandler); // This Should Be always Put After All the Routes
 
 app.listen(port, () => {
