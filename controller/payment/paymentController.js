@@ -14,7 +14,7 @@ const checkout = asyncHandler(async (req, res) => {
     // receipt: "order_rcptid_" + Date.now(),
   };
   const order = await instance.orders.create(options);
-  console.log(order);
+
   res.status(200).json({
     order: order,
     message: "Order Created",
