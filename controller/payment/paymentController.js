@@ -11,7 +11,7 @@ const checkout = asyncHandler(async (req, res) => {
   const options = {
     amount: Number(req.body.amount * 100),
     currency: "INR",
-    receipt: "order_rcptid_" + Date.now(),
+    // receipt: "order_rcptid_" + Date.now(),
   };
   const order = await instance.orders.create(options);
   console.log(order);
@@ -34,13 +34,14 @@ const verifyPayment = asyncHandler(async (req, res) => {
 
   if (isAuthenticate) {
     res.redirect(
-      `http://localhost:5000/users/paymentSuccess?reference=${razorpay_payment_id}`
+      `http://localhost:5173/users/paymentSuccess?reference=${razorpay_payment_id}`
     );
+
     res.status(200).json({
       message: "Payment Successful",
     });
   } else {
-    res.redirect(`http://localhost:5000/paymentFailed`);
+    res.redirect(`http://localhost:5173/users/paymentFailed`);
     res.status(200).json({
       message: "Payment Failed",
     });
