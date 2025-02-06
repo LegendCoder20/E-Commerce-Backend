@@ -14,6 +14,7 @@ const {
 
 //🟡🟡🟡🟡// -> NO AUTH <- //
 router.get("/", getAllProducts); // Get All Products (No login required)
+
 router.get("/product/:id", getProductDetails); // Get Only the Product of Specific ID (No login required)
 //🟡🟡🟡🟡//
 

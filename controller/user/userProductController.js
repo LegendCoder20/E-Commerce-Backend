@@ -3,10 +3,21 @@ const asyncHandler = require("express-async-handler");
 const Product = require("../../model/product model/productModel");
 
 const getAllProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find().populate("seller", "fullName");
+  const page = Math.max(1, parseInt(req.query.page) || 1);
+  const limit = Math.max(1, parseInt(req.query.limit) || 2);
+  const skip = (page - 1) * limit;
+
+  const totalProducts = await Product.countDocuments();
+  const products = await Product.find()
+    .populate("seller", "fullName")
+    .skip(skip)
+    .limit(limit);
 
   res.status(200).json({
     products: products,
+    currentPage: page,
+    totalPages: Math.ceil(totalProducts / limit),
+    totalProducts,
     message: "Fetched All Products",
   });
 });
