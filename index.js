@@ -55,6 +55,9 @@ app.get("/api/getKey", (req, res) => {
   });
 });
 
+// Admin Panel Route //
+app.use("/api", require("./routes/adminRoutes/adminRoutes"));
+
 app.use(errorHandler); // This Should Be always Put After All the Routes
 
 app.listen(port, () => {
