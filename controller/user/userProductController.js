@@ -4,7 +4,7 @@ const Product = require("../../model/product model/productModel");
 
 const getAllProducts = asyncHandler(async (req, res) => {
   const page = Math.max(1, parseInt(req.query.page) || 1);
-  const limit = Math.max(1, parseInt(req.query.limit) || 2);
+  const limit = Math.max(1, parseInt(req.query.limit) || 20);
   const skip = (page - 1) * limit;
 
   const totalProducts = await Product.countDocuments();
@@ -18,6 +18,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
     currentPage: page,
     totalPages: Math.ceil(totalProducts / limit),
     totalProducts,
+    limit,
     message: "Fetched All Products",
   });
 });
