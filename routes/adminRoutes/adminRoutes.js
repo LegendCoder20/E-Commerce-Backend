@@ -6,9 +6,9 @@ const {
   getAdminProducts,
 } = require("../../controller/admin/adminController");
 
-router.get("/users", getAllUsers);
-router.get("/sellers", getAllSellers);
-router.get("/products", getAdminProducts);
+router.post("/users", getAllUsers);
+router.post("/sellers", getAllSellers);
+router.post("/products", getAdminProducts);
 // router.delete("/product/:id").get()
 
 module.exports = router;

@@ -29,7 +29,7 @@ const getAllSellers = asyncHandler(async (req, res) => {
       "_id fullName phone businessEmail shopName address createdAt updatedAt"
     );
     res.status(200).json({
-      allSeller: allSeller,
+      allSellers: allSeller,
       message: "All Sellers Fetched",
     });
   } else {
