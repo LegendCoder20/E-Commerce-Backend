@@ -42,7 +42,9 @@ const getAdminProducts = asyncHandler(async (req, res) => {
   const password = req.body.password;
   if (pass === password) {
     const allProducts = await Product.find()
-      .select("_id name price image category description createdAt updatedAt")
+      .select(
+        "_id name price image category description quantity createdAt updatedAt"
+      )
       .populate("seller", "fullName businessEmail");
 
     res.status(200).json({
