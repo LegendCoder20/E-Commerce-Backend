@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//Cart Schema
 const CartSchema = mongoose.Schema(
   {
     user: {
