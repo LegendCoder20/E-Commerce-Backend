@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config({path: ".env"});
 let MONGO_URI = process.env.DB_PASSWORD;
 
-// console.log(MONGO_URI);
+//
 
 const dbConnect = async () => {
   mongoose.set("strictQuery", true);
